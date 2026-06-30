@@ -37,7 +37,9 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.wrap{width:100%;max-width:min(1440px,94vw);margin:0 auto;padding:0 32px}
+@media(min-width:1700px){.wrap{max-width:1600px}}
+@media(max-width:600px){.wrap{padding:0 20px}}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;border-radius:10px;padding:11px 18px;border:1px solid transparent;cursor:pointer;transition:.18s ease;font-family:var(--font)}
 .btn-primary{background:var(--primary);color:#fff}
 .btn-primary:hover{background:var(--primary-hover);transform:translateY(-1px);box-shadow:0 8px 20px -6px rgba(86,80,230,.5)}
@@ -69,7 +71,7 @@ h1.hero-title .grad{background:linear-gradient(120deg,var(--primary),#9C5BE0,var
 .hero-note{margin-top:16px;font-size:13.5px;color:var(--faint)}
 
 /* PRODUCT MOCK */
-.mock-frame{margin:54px auto 0;max-width:980px;border-radius:20px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden}
+.mock-frame{margin:54px auto 0;max-width:1180px;width:100%;border-radius:20px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden}
 .mock-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--border);background:var(--bg-soft)}
 .mock-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
 .mock-bar .r{background:#ff5f57}.mock-bar .y{background:#febc2e}.mock-bar .g{background:#28c840}
@@ -116,7 +118,8 @@ section{padding:84px 0}
 .sec-head p{font-size:17px;color:var(--muted)}
 
 /* FEATURES */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(min-width:1400px){.grid{grid-template-columns:repeat(3,1fr);gap:26px}}
 @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.grid{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:.2s}
