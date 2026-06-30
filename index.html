@@ -187,6 +187,94 @@ footer{border-top:1px solid var(--border);padding:40px 0;margin-top:20px}
 .foot .links a:hover{color:var(--ink)}
 .foot .cr{font-size:13px;color:var(--faint);width:100%;border-top:1px solid var(--border);padding-top:18px}
 
+/* ===== PRODUCT TOUR ===== */
+.tour-row{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;margin-bottom:64px}
+.tour-row:last-child{margin-bottom:0}
+.tour-row.flip .tour-copy{order:2}
+.tour-row.flip .shot{order:1}
+@media(max-width:880px){.tour-row{grid-template-columns:1fr;gap:28px}.tour-row.flip .tour-copy{order:1}.tour-row.flip .shot{order:2}}
+.tour-copy .num{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--primary);background:var(--primary-soft);padding:5px 12px;border-radius:100px;margin-bottom:14px}
+.tour-copy h3{font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em;line-height:1.12;margin-bottom:12px}
+.tour-copy p{font-size:16px;color:var(--muted);margin-bottom:16px}
+.tour-copy .mini{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.tour-copy .mini li{font-size:13px;font-weight:600;color:var(--ink-2);background:var(--bg-soft);border:1px solid var(--border);border-radius:8px;padding:6px 11px}
+
+/* browser shot frame */
+.shot{border-radius:16px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+.shot:hover{box-shadow:var(--shadow-lg)}
+.shot-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--border);background:var(--bg-soft)}
+.shot-bar i{width:9px;height:9px;border-radius:50%;background:#dcdce4}
+.shot-bar span{margin-left:10px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.shot-body{padding:18px 20px;text-align:left}
+.shot-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.shot-h h4{font-size:16px;letter-spacing:-.01em}
+
+/* schedule */
+.sch{display:flex;flex-direction:column;gap:2px}
+.sch-row{display:grid;grid-template-columns:54px 1fr;gap:12px;align-items:center;min-height:42px;border-top:1px dashed var(--border);padding:4px 0}
+.sch-row .tm{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.sblk{border-radius:9px;padding:8px 12px;font-size:13px;font-weight:600;border-left:3px solid}
+.sblk.p{background:var(--primary-soft);border-color:var(--primary);color:#3b35b8}
+.sblk.h{background:#E9F5E2;border-color:var(--success);color:#356018}
+.sblk.q{background:#FCEFD6;border-color:var(--orange);color:#9a5500}
+.sblk.r{background:#FBF3DC;border-color:var(--gold);color:#8a6500}
+.sblk small{display:block;font-weight:500;font-size:11px;opacity:.75;margin-top:1px}
+
+/* habits */
+.hab{display:flex;flex-direction:column;gap:11px}
+.hrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.hrow .hn{font-size:13.5px;font-weight:600}
+.hrow .hs{font-family:var(--mono);font-size:11.5px;color:var(--orange);font-weight:700;white-space:nowrap}
+.hdots{display:flex;gap:4px;margin-top:5px}
+.hdots i{width:15px;height:15px;border-radius:5px;background:var(--bg-tint);display:block}
+.hdots i.on{background:var(--success)}
+.hdots i.tdy{background:var(--primary);box-shadow:0 0 0 2px var(--primary-soft)}
+.hdots i.miss{background:#F3DDE8}
+
+/* character / alignment */
+.char-card{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#2A2660,#5650E6);color:#fff;border-radius:14px;padding:16px;margin-bottom:14px}
+.char-card .av{width:54px;height:54px;border-radius:12px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:28px;flex:none}
+.char-card .cn{font-weight:800;font-size:17px;letter-spacing:-.01em}
+.char-card .cl{font-size:12px;opacity:.8;font-family:var(--mono)}
+.char-card .cbar{height:7px;border-radius:20px;background:rgba(255,255,255,.2);overflow:hidden;margin-top:8px}
+.char-card .cbar i{display:block;height:100%;background:#FFB54D;border-radius:20px}
+.scale{display:flex;align-items:flex-end;justify-content:space-between;gap:3px;margin-bottom:6px}
+.scale .nub{flex:1;text-align:center}
+.scale .nub b{display:block;height:7px;border-radius:3px;background:var(--bg-tint)}
+.scale .nub.cur b{background:var(--primary);height:13px}
+.scale .nub span{font-size:9px;color:var(--faint);margin-top:5px;display:block;line-height:1.1}
+.scale .nub.cur span{color:var(--primary);font-weight:700}
+.scale-cap{display:flex;justify-content:space-between;font-size:10px;font-family:var(--mono);color:var(--faint)}
+
+/* rewards shop */
+.shop{display:flex;flex-direction:column;gap:9px}
+.sitem{display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:11px;padding:11px 13px}
+.sitem .e{font-size:22px}
+.sitem .t{font-weight:600;font-size:14px}
+.sitem .d{font-size:11.5px;color:var(--muted)}
+.sitem .rd{margin-left:auto;font-family:var(--mono);font-weight:700;color:var(--gold);font-size:13px;background:var(--gold-soft);padding:5px 11px;border-radius:8px;white-space:nowrap}
+
+/* changes */
+.chg{display:flex;flex-direction:column;gap:9px}
+.crow{display:flex;align-items:center;gap:11px;border:1px solid var(--border);border-radius:11px;padding:11px 13px}
+.rag{width:9px;height:9px;border-radius:50%;flex:none}
+.rag.g{background:var(--success)}.rag.a{background:var(--gold)}.rag.r{background:var(--error)}
+.crow .ct{font-weight:600;font-size:13.5px}
+.crow .cd{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.crow .cs{margin-left:auto;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.cs.ship{background:#E9F5E2;color:var(--success)}
+.cs.prog{background:var(--primary-soft);color:var(--primary)}
+.cs.plan{background:var(--bg-tint);color:var(--muted)}
+
+/* project view */
+.phase{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:14px 0 8px;display:flex;align-items:center;gap:8px}
+.phase:first-child{margin-top:0}
+.phase .pc{background:var(--bg-tint);border-radius:20px;padding:1px 8px;color:var(--muted)}
+.sub{margin-left:30px;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px;padding:5px 0}
+.sub .sck{width:14px;height:14px;border-radius:4px;border:2px solid #d3d3de;flex:none}
+.sub.done .sck{background:var(--success);border-color:var(--success)}
+.sub.done span{text-decoration:line-through;color:var(--faint)}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -199,6 +287,7 @@ footer{border-top:1px solid var(--border);padding:40px 0;margin-top:20px}
     <a class="logo" href="#"><span class="mark">⚡</span> Project ADHD</a>
     <nav class="nav-links">
       <a href="#features">Features</a>
+      <a href="#tour">Tour</a>
       <a href="#gamify">Rewards</a>
       <a href="#how">How it works</a>
       <a href="#faq">FAQ</a>
@@ -317,8 +406,170 @@ footer{border-top:1px solid var(--border);padding:40px 0;margin-top:20px}
   </div>
 </section>
 
+<!-- PRODUCT TOUR -->
+<section id="tour">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Take the tour</span>
+      <h2>Every view, built to keep you moving</h2>
+      <p>Six connected spaces — plan your day, build streaks, level up, and watch projects actually get finished.</p>
+    </div>
+
+    <!-- 1. Schedule -->
+    <div class="tour-row reveal">
+      <div class="tour-copy">
+        <span class="num">01 · Schedule</span>
+        <h3>Plan the day without the dread</h3>
+        <p>Time-box your actions, habits and quick tasks into a simple visual day. "When" stops being one more decision you freeze on.</p>
+        <ul class="mini"><li>⏱️ Time-boxing</li><li>🔁 Recurring tasks</li><li>🎨 Colour-coded by pillar</li></ul>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Schedule — Tuesday</span></div>
+        <div class="shot-body">
+          <div class="shot-h"><h4>📅 Today's plan</h4><span class="coin">🪙 1,240</span></div>
+          <div class="sch">
+            <div class="sch-row"><span class="tm">08:30</span><div class="sblk h">Morning routine + water 💧<small>Habit · 15 min</small></div></div>
+            <div class="sch-row"><span class="tm">09:00</span><div class="sblk p">Deep work — landing page copy<small>Launch site · 90 min</small></div></div>
+            <div class="sch-row"><span class="tm">11:00</span><div class="sblk q">Reply to 3 emails (timer)<small>Quick task</small></div></div>
+            <div class="sch-row"><span class="tm">13:30</span><div class="sblk h">Gym — fitness reset<small>Habit · 45 min</small></div></div>
+            <div class="sch-row"><span class="tm">16:00</span><div class="sblk p">User testing call<small>Launch site</small></div></div>
+            <div class="sch-row"><span class="tm">20:00</span><div class="sblk r">Reward: 2 hrs gaming 🎮<small>Redeemed</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Habit tracker -->
+    <div class="tour-row flip reveal">
+      <div class="tour-copy">
+        <span class="num">02 · Habits</span>
+        <h3>Streaks that reward consistency, not perfection</h3>
+        <p>A clean monthly grid shows what you've kept up. Miss a day? Pick it straight back up — no shame spiral, just momentum.</p>
+        <ul class="mini"><li>🔥 Streak counts</li><li>🗓️ Monthly view</li><li>📋 Copy summary</li></ul>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Habits — June</span></div>
+        <div class="shot-body">
+          <div class="shot-h"><h4>🔥 Good habits</h4><span style="font-size:12px;color:var(--muted)">Last 7 days</span></div>
+          <div class="hab">
+            <div><div class="hrow"><span class="hn">🧘 Meditate</span><span class="hs">🔥 12 days</span></div><div class="hdots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="tdy"></i></div></div>
+            <div><div class="hrow"><span class="hn">🏋️ Workout</span><span class="hs">🔥 5 days</span></div><div class="hdots"><i class="on"></i><i class="miss"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="tdy"></i></div></div>
+            <div><div class="hrow"><span class="hn">📖 Read 10 pages</span><span class="hs">🔥 9 days</span></div><div class="hdots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="tdy"></i></div></div>
+            <div><div class="hrow"><span class="hn">💧 Hydrate</span><span class="hs">🔥 3 days</span></div><div class="hdots"><i class="miss"></i><i class="miss"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="miss"></i><i class="tdy"></i></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Character -->
+    <div class="tour-row reveal">
+      <div class="tour-copy">
+        <span class="num">03 · Character</span>
+        <h3>Your alignment, from the Dark Side to Jedi Master</h3>
+        <p>Your monthly choices move your character along an alignment scale. Spend time on what matters and rise from the Emperor all the way to Yoda.</p>
+        <ul class="mini"><li>⚔️ Levels &amp; XP</li><li>🌗 Monthly alignment</li><li>🏆 Earned titles</li></ul>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Character</span></div>
+        <div class="shot-body">
+          <div class="char-card">
+            <div class="av">🧙</div>
+            <div style="flex:1">
+              <div class="cn">Obi-Wan</div>
+              <div class="cl">Level 7 · The Focused · 🪙 1,240</div>
+              <div class="cbar"><i style="width:68%"></i></div>
+            </div>
+          </div>
+          <div class="scale">
+            <div class="nub"><b></b><span>Emperor</span></div>
+            <div class="nub"><b></b><span>Vader</span></div>
+            <div class="nub"><b></b><span>Dooku</span></div>
+            <div class="nub"><b></b><span>Anakin</span></div>
+            <div class="nub"><b></b><span>Windu</span></div>
+            <div class="nub"><b></b><span>Qui-Gon</span></div>
+            <div class="nub cur"><b></b><span>Obi-Wan</span></div>
+            <div class="nub"><b></b><span>Luke</span></div>
+            <div class="nub"><b></b><span>Yoda</span></div>
+          </div>
+          <div class="scale-cap"><span>◀ Dark side</span><span>Light side ▶</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Reward system -->
+    <div class="tour-row flip reveal">
+      <div class="tour-copy">
+        <span class="num">04 · Rewards</span>
+        <h3>Spend your coins on rewards you actually want</h3>
+        <p>Finishing things earns coins. Cash them in at your own shop — guilt-free gaming, a takeaway, or a day off a habit. Add custom rewards too.</p>
+        <ul class="mini"><li>🪙 Coin balance</li><li>🛒 Reward shop</li><li>➕ Custom rewards</li></ul>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Rewards &amp; Shop</span></div>
+        <div class="shot-body">
+          <div class="shot-h"><h4>🎁 Reward shop</h4><span class="coin">🪙 1,240</span></div>
+          <div class="shop">
+            <div class="sitem"><span class="e">🛌</span><div><div class="t">Rest Day</div><div class="d">Skip one habit day guilt-free</div></div><span class="rd">50 🪙</span></div>
+            <div class="sitem"><span class="e">⏭️</span><div><div class="t">Skip a Task</div><div class="d">Move one action to tomorrow</div></div><span class="rd">30 🪙</span></div>
+            <div class="sitem"><span class="e">🎮</span><div><div class="t">Game Session</div><div class="d">2 hours guilt-free gaming</div></div><span class="rd">75 🪙</span></div>
+            <div class="sitem"><span class="e">🍕</span><div><div class="t">Takeaway Night</div><div class="d">Order your favourite food</div></div><span class="rd">200 🪙</span></div>
+            <div class="sitem"><span class="e">🌟</span><div><div class="t">Gold Theme</div><div class="d">Unlock gold accent theme</div></div><span class="rd">150 🪙</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Change logs -->
+    <div class="tour-row reveal">
+      <div class="tour-copy">
+        <span class="num">05 · Changes</span>
+        <h3>See everything you actually shipped</h3>
+        <p>A running log of what got done and what's in flight — each with a status and red/amber/green health. Proof of progress on the days it doesn't feel like it.</p>
+        <ul class="mini"><li>🚦 RAG health</li><li>📦 Shipped this month</li><li>🪙 Coins on completion</li></ul>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Changes</span></div>
+        <div class="shot-body">
+          <div class="shot-h"><h4>📦 Shipped this month</h4><span style="font-size:12px;color:var(--success);font-weight:600">+90 🪙</span></div>
+          <div class="chg">
+            <div class="crow"><span class="rag g"></span><div><div class="ct">Launched waitlist landing page</div><div class="cd">Jun 30 · Launch site</div></div><span class="cs ship">Shipped</span></div>
+            <div class="crow"><span class="rag g"></span><div><div class="ct">Wired up Formspree signups</div><div class="cd">Jun 30 · Launch site</div></div><span class="cs ship">Shipped</span></div>
+            <div class="crow"><span class="rag a"></span><div><div class="ct">Connect custom domain</div><div class="cd">In progress · Launch site</div></div><span class="cs prog">In&nbsp;progress</span></div>
+            <div class="crow"><span class="rag r"></span><div><div class="ct">Write onboarding emails</div><div class="cd">Planned · Marketing</div></div><span class="cs plan">Planned</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Project view -->
+    <div class="tour-row flip reveal">
+      <div class="tour-copy">
+        <span class="num">06 · Projects</span>
+        <h3>Big scary goals, broken into doable steps</h3>
+        <p>Organise life into pillars, then split each project into phases, actions and sub-actions. Deploy reusable templates so you never face a blank page.</p>
+        <ul class="mini"><li>🗂️ Phases</li><li>✅ Sub-actions</li><li>📄 Templates</li></ul>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Projects · Career &amp; Creation</span></div>
+        <div class="shot-body">
+          <div class="shot-h"><h4>🚀 Launch Project ADHD</h4><span class="pill proj">In progress</span></div>
+          <div class="bar" style="margin-bottom:14px"><i style="width:60%"></i></div>
+          <div class="phase">Phase 1 — Build <span class="pc">Done</span></div>
+          <div class="task done"><span class="ck"></span><span class="tt">Design landing page</span></div>
+          <div class="phase">Phase 2 — Ship <span class="pc">2 / 3</span></div>
+          <div class="task done"><span class="ck"></span><span class="tt">Deploy to Vercel</span></div>
+          <div class="task"><span class="ck"></span><span class="tt">Connect custom domain</span><span class="pill quick">Next</span></div>
+          <div class="sub done"><span class="sck"></span><span>Buy domain</span></div>
+          <div class="sub"><span class="sck"></span><span>Point DNS records</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
-<section id="how">
+<section id="how" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Dead simple</span>
