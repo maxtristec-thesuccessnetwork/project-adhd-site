@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project ADHD — The productivity system built for ADHD brains</title>
+<meta name="description" content="Capture, organise and actually finish things. Project ADHD turns scattered thoughts into projects, habits and quick wins — with XP, coins and rewards that keep you going.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#5650E6;
+  --primary-hover:#443EC9;
+  --primary-soft:#ECEBFC;
+  --gold:#d19900;
+  --gold-soft:#FBF3DC;
+  --orange:#FF9220;
+  --success:#437a22;
+  --purple:#7a39bb;
+  --error:#a12c7b;
+  --ink:#1C1C1E;
+  --ink-2:#3a3a40;
+  --muted:#6b6b76;
+  --faint:#9a9aa5;
+  --bg:#ffffff;
+  --bg-soft:#F7F7FA;
+  --bg-tint:#F2F2F7;
+  --border:#E7E7EE;
+  --shadow:0 1px 2px rgba(16,16,40,.04),0 12px 32px -8px rgba(16,16,40,.10);
+  --shadow-lg:0 2px 4px rgba(16,16,40,.05),0 40px 80px -24px rgba(40,36,120,.28);
+  --radius:18px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;border-radius:10px;padding:11px 18px;border:1px solid transparent;cursor:pointer;transition:.18s ease;font-family:var(--font)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-hover);transform:translateY(-1px);box-shadow:0 8px 20px -6px rgba(86,80,230,.5)}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--border)}
+.btn-ghost:hover{background:var(--bg-soft);border-color:#d7d7e0}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);font-weight:600}
+
+/* NAV */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.01em}
+.logo .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary),#8A85FF);display:grid;place-items:center;color:#fff;font-size:17px;box-shadow:0 6px 14px -4px rgba(86,80,230,.6)}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--muted);font-weight:500}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+@media(max-width:820px){.nav-links{display:none}.nav-cta .btn-ghost{display:none}}
+
+/* HERO */
+.hero{padding:84px 0 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:520px;background:radial-gradient(ellipse at center,rgba(86,80,230,.12),transparent 70%);z-index:-1}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--primary-soft);color:var(--primary);font-weight:600;font-size:13px;padding:6px 14px;border-radius:100px;margin-bottom:22px}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1.hero-title{font-size:clamp(38px,6vw,62px);line-height:1.05;letter-spacing:-.03em;font-weight:800;max-width:880px;margin:0 auto 22px}
+h1.hero-title .grad{background:linear-gradient(120deg,var(--primary),#9C5BE0,var(--orange));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:600px;margin:0 auto 30px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-note{margin-top:16px;font-size:13.5px;color:var(--faint)}
+
+/* PRODUCT MOCK */
+.mock-frame{margin:54px auto 0;max-width:980px;border-radius:20px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden}
+.mock-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--border);background:var(--bg-soft)}
+.mock-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.mock-bar .r{background:#ff5f57}.mock-bar .y{background:#febc2e}.mock-bar .g{background:#28c840}
+.mock-bar span{margin-left:12px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.mock-body{display:grid;grid-template-columns:188px 1fr;min-height:380px}
+.mock-side{background:var(--bg-tint);border-right:1px solid var(--border);padding:16px 12px;font-size:13px}
+.mock-side .si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;color:var(--ink-2);font-weight:500;margin-bottom:2px}
+.mock-side .si.active{background:#fff;color:var(--primary);box-shadow:var(--shadow);font-weight:600}
+.mock-side .si .c{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint);background:#fff;padding:1px 7px;border-radius:20px;border:1px solid var(--border)}
+.mock-side .grp{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:16px 10px 6px}
+.mock-main{padding:22px 24px;text-align:left}
+.mock-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.mock-h h3{font-size:21px;letter-spacing:-.02em}
+.coin{display:inline-flex;align-items:center;gap:6px;background:var(--gold-soft);color:var(--gold);font-weight:700;font-size:13px;padding:5px 12px;border-radius:100px;font-family:var(--mono)}
+.lvl{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);margin-left:10px}
+.lvl .ring{width:22px;height:22px;border-radius:50%;background:conic-gradient(var(--primary) 68%,var(--border) 0);display:grid;place-items:center}
+.lvl .ring i{width:15px;height:15px;border-radius:50%;background:#fff;display:block;font-style:normal;font-size:9px;text-align:center;line-height:15px;color:var(--primary);font-weight:700}
+.task{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;margin-bottom:9px;background:#fff;transition:.15s}
+.task:hover{border-color:#c9c7f5;box-shadow:var(--shadow)}
+.task .ck{width:20px;height:20px;border-radius:6px;border:2px solid #d3d3de;flex:none}
+.task.done .ck{background:var(--primary);border-color:var(--primary);position:relative}
+.task.done .ck::after{content:"✓";color:#fff;font-size:12px;position:absolute;inset:0;text-align:center;line-height:16px}
+.task.done .tt{color:var(--faint);text-decoration:line-through}
+.task .tt{font-weight:500;font-size:14.5px}
+.task .pill{margin-left:auto;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.pill.proj{background:var(--primary-soft);color:var(--primary)}
+.pill.habit{background:#E9F5E2;color:var(--success)}
+.pill.quick{background:#FCEFD6;color:var(--orange)}
+.xp-toast{position:absolute;right:24px;bottom:20px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:10px;font-family:var(--mono);box-shadow:var(--shadow-lg)}
+.mock-main{position:relative}
+@media(max-width:680px){.mock-side{display:none}.mock-body{grid-template-columns:1fr}}
+
+/* LOGOS / proof strip */
+.proof{padding:40px 0 8px;text-align:center}
+.proof p{font-size:13px;color:var(--faint);font-weight:500;letter-spacing:.02em}
+.proof .stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.stat .n{font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--primary)}
+.stat .l{font-size:13px;color:var(--muted)}
+
+/* SECTION */
+section{padding:84px 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 52px}
+.sec-head h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.025em;line-height:1.1;margin:14px 0 14px}
+.sec-head p{font-size:17px;color:var(--muted)}
+
+/* FEATURES */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#dcdbf6}
+.card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:16px;background:var(--primary-soft)}
+.card h3{font-size:18px;letter-spacing:-.01em;margin-bottom:8px}
+.card p{font-size:14.5px;color:var(--muted)}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:840px){.split{grid-template-columns:1fr;gap:36px}}
+.split h2{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.025em;line-height:1.12;margin:14px 0 16px}
+.split p.lead{font-size:16.5px;color:var(--muted);margin-bottom:22px}
+.flist{list-style:none;display:flex;flex-direction:column;gap:14px}
+.flist li{display:flex;gap:12px;font-size:15px;color:var(--ink-2)}
+.flist .tick{flex:none;width:22px;height:22px;border-radius:7px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font-size:12px;font-weight:700}
+
+/* gamify panel */
+.gpanel{background:linear-gradient(160deg,#FBF3DC,#fff 60%);border:1px solid #f0e4c2;border-radius:24px;padding:34px}
+.greward{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.greward .e{font-size:26px}
+.greward .t{font-weight:600;font-size:15px}
+.greward .s{font-size:12.5px;color:var(--muted)}
+.greward .cost{margin-left:auto;font-family:var(--mono);font-weight:700;color:var(--gold);font-size:14px;white-space:nowrap}
+.bar{height:9px;border-radius:20px;background:var(--bg-tint);overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),#8A85FF);border-radius:20px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding-top:8px}
+.step .num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--primary);background:var(--primary-soft);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px}
+.step h3{font-size:18px;margin-bottom:7px;letter-spacing:-.01em}
+.step p{font-size:14.5px;color:var(--muted)}
+
+/* CTA / waitlist */
+.cta{background:linear-gradient(150deg,#2A2660,#5650E6);border-radius:28px;padding:60px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,146,32,.35),transparent 65%);top:-160px;right:-120px}
+.cta h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.025em;margin-bottom:14px;position:relative}
+.cta p{font-size:17px;opacity:.85;max-width:460px;margin:0 auto 28px;position:relative}
+.wlform{display:flex;gap:10px;max-width:440px;margin:0 auto;position:relative;flex-wrap:wrap;justify-content:center}
+.wlform input{flex:1;min-width:220px;padding:13px 16px;border-radius:11px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;font-size:15px;font-family:var(--font)}
+.wlform input::placeholder{color:rgba(255,255,255,.6)}
+.wlform input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.18)}
+.wlform .btn-primary{background:#fff;color:var(--primary)}
+.wlform .btn-primary:hover{background:#f1f0ff}
+.wlmsg{margin-top:16px;font-size:14px;font-weight:600;min-height:20px;position:relative}
+.cta .micro{margin-top:14px;font-size:12.5px;opacity:.7;position:relative}
+
+/* FAQ */
+.faq{max-width:760px;margin:0 auto}
+details{border:1px solid var(--border);border-radius:14px;padding:4px 20px;margin-bottom:12px;background:#fff;transition:.2s}
+details[open]{box-shadow:var(--shadow);border-color:#dcdbf6}
+summary{font-weight:600;font-size:16px;padding:16px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;color:var(--primary);font-weight:400}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 18px;color:var(--muted);font-size:14.5px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:40px 0;margin-top:20px}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot .logo{font-size:16px}
+.foot .links{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+.foot .links a:hover{color:var(--ink)}
+.foot .cr{font-size:13px;color:var(--faint);width:100%;border-top:1px solid var(--border);padding-top:18px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#"><span class="mark">⚡</span> Project ADHD</a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#gamify">Rewards</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#waitlist" class="btn btn-ghost">Sign in</a>
+      <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span> Built by an ADHD brain, for ADHD brains</span>
+    <h1 class="hero-title">The productivity system that <span class="grad">actually works</span> with your ADHD</h1>
+    <p class="hero-sub">Capture every thought before it vanishes, turn the chaos into projects and habits, and earn XP, coins and real rewards for getting things done.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn btn-primary">Join the waitlist →</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+    <p class="hero-note">Free during early access · No credit card · Works in your browser</p>
+
+    <!-- product mockup -->
+    <div class="mock-frame reveal">
+      <div class="mock-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>project-adhd.app</span></div>
+      <div class="mock-body">
+        <aside class="mock-side">
+          <div class="si active">📥 Today <span class="c">5</span></div>
+          <div class="si">⚡ Quick Tasks <span class="c">8</span></div>
+          <div class="si">📅 Schedule</div>
+          <div class="si">🔥 Habits</div>
+          <div class="grp">Projects</div>
+          <div class="si">🚀 Launch site <span class="c">3</span></div>
+          <div class="si">💪 Fitness reset <span class="c">2</span></div>
+          <div class="grp">You</div>
+          <div class="si">⚔️ Character</div>
+          <div class="si">🎁 Rewards</div>
+        </aside>
+        <div class="mock-main">
+          <div class="mock-h">
+            <h3>📥 Today</h3>
+            <div style="display:flex;align-items:center">
+              <span class="coin">🪙 1,240</span>
+              <span class="lvl"><span class="ring"><i>7</i></span> Level 7</span>
+            </div>
+          </div>
+          <div class="task done"><span class="ck"></span><span class="tt">Brain-dump weekend ideas</span><span class="pill quick">Quick</span></div>
+          <div class="task"><span class="ck"></span><span class="tt">Draft landing page copy</span><span class="pill proj">Launch site</span></div>
+          <div class="task"><span class="ck"></span><span class="tt">10-min tidy reset</span><span class="pill habit">Habit</span></div>
+          <div class="task"><span class="ck"></span><span class="tt">Reply to 3 emails (timer)</span><span class="pill quick">Quick</span></div>
+          <div class="task"><span class="ck"></span><span class="tt">Stretch + water 💧</span><span class="pill habit">Habit</span></div>
+          <div class="xp-toast">+25 XP · 🪙 +10 nice one!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof" style="padding-top:8px">
+  <div class="wrap">
+    <p>WHAT YOUR BRAIN GETS BACK</p>
+    <div class="stats">
+      <div class="stat"><div class="n">0</div><div class="l">thoughts lost to the void</div></div>
+      <div class="stat"><div class="n">3s</div><div class="l">to capture an action</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l">dopamine for finishing</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Everything in one place</span>
+      <h2>One app for the way an ADHD brain actually moves</h2>
+      <p>Stop juggling six tools that all fall apart by Wednesday. Capture, organise and finish — without the overwhelm.</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal"><div class="ic">📥</div><h3>Instant capture</h3><p>Got a thought? Dump it in three seconds before it disappears. Sort it into a project later — capture now, decide never-not.</p></div>
+      <div class="card reveal"><div class="ic">🚀</div><h3>Projects &amp; phases</h3><p>Break big scary goals into phases, actions and sub-actions. Deploy reusable templates so you never start from a blank page.</p></div>
+      <div class="card reveal"><div class="ic">⚡</div><h3>Quick tasks</h3><p>A fast lane for the little stuff. Tiny wins, checked off fast, building the momentum your brain craves.</p></div>
+      <div class="card reveal"><div class="ic">🔥</div><h3>Habit tracking</h3><p>Visual monthly streaks that reward consistency, not perfection. Miss a day? Pick it right back up, guilt-free.</p></div>
+      <div class="card reveal"><div class="ic">📅</div><h3>Schedule</h3><p>See your day without the dread. Time-box actions and recurring tasks so "when" never becomes another decision to freeze on.</p></div>
+      <div class="card reveal"><div class="ic">📊</div><h3>Monthly insights</h3><p>Gentle, honest stats on what you actually did — so you can see progress on the days it doesn't feel like it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMIFY SPLIT -->
+<section id="gamify" style="background:var(--bg-soft)">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">The dopamine engine</span>
+      <h2>Turn "I should" into "I get to" with XP, coins &amp; rewards</h2>
+      <p class="lead">ADHD brains run on reward, not willpower. Every action you finish earns XP and coins. Level up your character, build alignment, and cash coins in for rewards you actually chose.</p>
+      <ul class="flist">
+        <li><span class="tick">⚔️</span><div><strong>Character &amp; levels</strong> — watch yourself grow with every completed action.</div></li>
+        <li><span class="tick">🪙</span><div><strong>Earn coins</strong> for tasks, habits, and shipping whole projects.</div></li>
+        <li><span class="tick">🎁</span><div><strong>Custom rewards</strong> — set your own treats and redeem them when you've earned it.</div></li>
+        <li><span class="tick">🔥</span><div><strong>Streaks &amp; level-ups</strong> that celebrate momentum, not guilt.</div></li>
+      </ul>
+    </div>
+    <div class="gpanel reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-weight:700;font-size:15px">⚔️ Level 7 — The Focused</span>
+        <span class="coin">🪙 1,240</span>
+      </div>
+      <div class="bar"><i style="width:68%"></i></div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:22px">320 XP to Level 8</div>
+      <div class="greward"><span class="e">☕</span><div><div class="t">Fancy coffee run</div><div class="s">Your pick of treat</div></div><span class="cost">200 🪙</span></div>
+      <div class="greward"><span class="e">🎮</span><div><div class="t">2 hrs guilt-free gaming</div><div class="s">You earned this one</div></div><span class="cost">500 🪙</span></div>
+      <div class="greward"><span class="e">🍕</span><div><div class="t">Friday takeaway</div><div class="s">Habit streak bonus</div></div><span class="cost">800 🪙</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Dead simple</span>
+      <h2>From scattered to sorted in three steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">1</div><h3>Capture it</h3><p>Brain too loud? Empty it. Every idea, task and "oh no I forgot" lands in one place in seconds.</p></div>
+      <div class="step reveal"><div class="num">2</div><h3>Organise it</h3><p>Drop captures into projects, quick tasks or habits. Use templates so structure is one click, not a chore.</p></div>
+      <div class="step reveal"><div class="num">3</div><h3>Finish &amp; get rewarded</h3><p>Check things off, earn XP and coins, level up — and feel the progress instead of just chasing it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST CTA -->
+<section id="waitlist">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Get early access to Project ADHD</h2>
+      <p>Join the waitlist and be first in when early access opens. Free to start — no pressure, no spam.</p>
+      <form class="wlform" id="wlform" action="https://formspree.io/f/xnjkbvdw" method="POST" novalidate>
+        <input type="email" id="wlemail" name="email" placeholder="you@email.com" aria-label="Email address" required>
+        <input type="hidden" name="_subject" value="New Project ADHD waitlist signup 🎉">
+        <button type="submit" class="btn btn-primary" id="wlbtn">Join the waitlist</button>
+      </form>
+      <div class="wlmsg" id="wlmsg" aria-live="polite"></div>
+      <div class="micro">⚡ Built for focus · 🔒 Your data stays yours · 💜 Made with ADHD in mind</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Good to know</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>Is this really different from Notion or a to-do app?</summary><p>Most tools assume you'll show up with willpower. Project ADHD is built around how ADHD brains work: frictionless capture so nothing's lost, gentle structure that doesn't overwhelm, and a reward system that gives your brain the dopamine it needs to keep going.</p></details>
+      <details><summary>Do I need to set up a complicated system?</summary><p>No. Start by dumping thoughts. Templates and projects are there when you want them, ignorable when you don't. It works whether you're a planner or a "I'll deal with it later" person.</p></details>
+      <details><summary>What does the XP and coins stuff actually do?</summary><p>You earn XP and coins for completing actions, habits and projects. Coins can be redeemed for rewards you set yourself, and XP levels up your character — turning everyday tasks into something your brain wants to do.</p></details>
+      <details><summary>How much will it cost?</summary><p>It's free during early access. Waitlist members get the longest free run and a say in what gets built next.</p></details>
+      <details><summary>Where does my data live?</summary><p>Project ADHD runs in your browser and keeps your data with you. No selling, no creepy tracking — your brain dump is your business.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#"><span class="mark">⚡</span> Project ADHD</a>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#gamify">Rewards</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#waitlist">Join waitlist</a>
+      </div>
+    </div>
+    <div class="foot"><div class="cr">© 2026 Project ADHD · Made with 💜 for brilliant, busy, beautifully scattered minds.</div></div>
+  </div>
+</footer>
+
+<script>
+// reveal on scroll
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// waitlist — submits to Formspree via AJAX (keeps user on page, shows inline message)
+const form=document.getElementById('wlform'),msg=document.getElementById('wlmsg'),email=document.getElementById('wlemail'),btn=document.getElementById('wlbtn');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=email.value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){msg.style.color='#FFD9A8';msg.textContent='Hmm, that email doesn’t look right — mind checking it?';return;}
+  btn.disabled=true;const label=btn.textContent;btn.textContent='Joining…';
+  msg.style.color='';msg.textContent='';
+  try{
+    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+    if(res.ok){
+      msg.style.color='#CFF5C0';msg.textContent='You’re on the list! 🎉 Watch your inbox for early access.';
+      form.reset();
+    }else{
+      const data=await res.json().catch(()=>({}));
+      const err=(data.errors&&data.errors.map(x=>x.message).join(', '))||'Something went wrong — please try again.';
+      msg.style.color='#FFD9A8';msg.textContent=err;
+    }
+  }catch(_){
+    msg.style.color='#FFD9A8';msg.textContent='Network error — please check your connection and try again.';
+  }finally{
+    btn.disabled=false;btn.textContent=label;
+  }
+});
+</script>
+</body>
+</html>
